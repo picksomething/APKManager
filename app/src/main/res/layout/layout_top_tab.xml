@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/guide_round_selector"
+            android:clickable="true"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="20dp"

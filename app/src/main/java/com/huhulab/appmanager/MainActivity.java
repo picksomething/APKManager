@@ -80,7 +80,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.apk_tv:
+                mPager.setCurrentItem(0);
+                break;
+            case R.id.app_tv:
+                mPager.setCurrentItem(1);
+                break;
+            default:
+                break;
+        }
     }
 
     private ViewPager.OnPageChangeListener mPageListener = new ViewPager.OnPageChangeListener() {
