@@ -42,10 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:background="@drawable/po_bt_selector"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:text="@string/apk_install"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <Button
@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/installBt"
+            android:background="@drawable/ne_bt_selector"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

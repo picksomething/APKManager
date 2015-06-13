@@ -22,31 +22,19 @@
             android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/apkIcon"
+            android:layout_alignTop="@id/appIcon"
             android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/apkIcon"
+            android:layout_toRightOf="@id/appIcon"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/appVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/apkIcon"
+            android:layout_alignBottom="@id/appIcon"
             android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/apkIcon"
+            android:layout_toRightOf="@id/appIcon"
             android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/uninstallIt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/app_uninstall"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/openIt"
@@ -54,11 +42,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/uninstallIt"
+            android:background="@drawable/po_bt_selector"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/app_open"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/uninstallIt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/openIt"
+            android:background="@drawable/ne_bt_selector"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/app_uninstall"
             android:textSize="18sp" />
 
     </RelativeLayout>
