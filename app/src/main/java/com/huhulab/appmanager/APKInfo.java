@@ -8,4 +8,5 @@ public class APKInfo {
     public Bitmap apkIcon;
     public String apkName;
     public String apkSize;
+    public String apkPath;
 }

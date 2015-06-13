@@ -24,15 +24,15 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.layout_app_item, viewGroup, false);
-
         return new APPViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(APPViewHolder appViewHolder, int i) {
+        APPInfo appInfo = mAppInfoList.get(i);
         appViewHolder.mAppIcon.setImageResource(R.mipmap.ic_launcher);
-        appViewHolder.mAppName.setText("hello.apk");
-        appViewHolder.mAppVersion.setText("V1.0.00");
+        appViewHolder.mAppName.setText(appInfo.appName);
+        appViewHolder.mAppVersion.setText(appInfo.appVersion);
     }
 
     @Override

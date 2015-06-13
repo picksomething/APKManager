@@ -23,15 +23,15 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
     public APKAdapter.APKViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_apk_item, viewGroup, false);
-
         return new APKViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(APKViewHolder apkViewHolder, int i) {
+        APKInfo apkInfo = mApkInfoList.get(i);
         apkViewHolder.mApkIcon.setImageResource(R.mipmap.ic_launcher);
-        apkViewHolder.mApkName.setText("hello.apk");
-        apkViewHolder.mApkSize.setText("2.3M");
+        apkViewHolder.mApkName.setText(apkInfo.apkName);
+        apkViewHolder.mApkSize.setText(apkInfo.apkSize);
     }
 
     @Override
