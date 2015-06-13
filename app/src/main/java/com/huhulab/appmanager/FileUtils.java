@@ -72,26 +72,26 @@ public class FileUtils {
                     }
                     Drawable apk_icon = appInfo.loadIcon(pm);
                     apkInfo.apkIcon = apk_icon;
-                }
-                apkInfo.apkName = f.getName().substring(0, f.getName().lastIndexOf("."));
-                apkInfo.apkSize = apkSize;
-                apkInfo.apkPath = apkPath;
+                    apkInfo.apkName = f.getName().substring(0, f.getName().lastIndexOf("."));
+                    apkInfo.apkSize = apkSize;
+                    apkInfo.apkPath = apkPath;
 
-                /** 得到包名 */
-                String packageName = packageInfo.packageName;
-                // apkInfo.apkPackage = packageName;
-                /** apk的版本名称 String*/
-                String versionName = packageInfo.versionName;
-                apkInfo.apkVersionName = versionName;
-                /** apk的版本号码 int */
-                int versionCode = packageInfo.versionCode;
-                apkInfo.apkVersionCode = versionCode;
-                int type = doType(pm, packageName, versionCode);
-                apkInfo.apkType = type;
-                apkInfoList.add(apkInfo);
+                    /** 得到包名 */
+                    String packageName = packageInfo.packageName;
+                    // apkInfo.apkPackage = packageName;
+                    /** apk的版本名称 String*/
+                    String versionName = packageInfo.versionName;
+                    apkInfo.apkVersionName = versionName;
+                    /** apk的版本号码 int */
+                    int versionCode = packageInfo.versionCode;
+                    apkInfo.apkVersionCode = versionCode;
+                    int type = doType(pm, packageName, versionCode);
+                    apkInfo.apkType = type;
+                    apkInfoList.add(apkInfo);
+                }
             }
         } catch (Exception e) {
-            Log.d(TAG, "get apk info fail " + e);
+            Log.d(TAG, "get apk info " + e);
         }
     }
 
@@ -116,7 +116,7 @@ public class FileUtils {
         for (PackageInfo pi : packageInfos) {
             String pi_packageName = pi.packageName;
             int pi_versionCode = pi.versionCode;
-            if (packageName.endsWith(pi_packageName)) {
+            if (packageName.equals(pi_packageName)) {
                 if (versionCode == pi_versionCode) {
                     Log.d(TAG, "have installed don't need update");
                     return INSTALLED;

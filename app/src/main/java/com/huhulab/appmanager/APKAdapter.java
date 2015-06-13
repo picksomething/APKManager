@@ -39,8 +39,11 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         switch (apkInfo.apkType) {
             case 0:
                 apkViewHolder.mInstallApk.setText("已安装");
+                apkViewHolder.mInstallApk.setEnabled(false);
+                apkViewHolder.mInstallApk.setAlpha(0.3f);
                 break;
             case 1:
+                apkViewHolder.mInstallApk.setEnabled(true);
                 apkViewHolder.mInstallApk.setText("安装");
                 break;
             case 2:
