@@ -26,7 +26,8 @@ public class APKFragment extends Fragment {
         mAPKLayoutManager = new LinearLayoutManager(this.getActivity());
         mAPKLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mApkRecyclerView.setLayoutManager(mAPKLayoutManager);
-        APKAdapter apkAdapter = new APKAdapter(createList(30));
+        APKAdapter apkAdapter = new APKAdapter(
+                FileUtils.getResultList(this.getActivity()));
         mApkRecyclerView.setAdapter(apkAdapter);
         return apkView;
     }

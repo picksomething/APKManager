@@ -29,9 +29,26 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
     @Override
     public void onBindViewHolder(APKViewHolder apkViewHolder, int i) {
         APKInfo apkInfo = mApkInfoList.get(i);
-        apkViewHolder.mApkIcon.setImageResource(R.mipmap.ic_launcher);
+        if (apkInfo.apkIcon == null) {
+            apkViewHolder.mApkIcon.setImageResource(R.mipmap.ic_launcher);
+        } else {
+            apkViewHolder.mApkIcon.setImageDrawable(apkInfo.apkIcon);
+        }
         apkViewHolder.mApkName.setText(apkInfo.apkName);
         apkViewHolder.mApkSize.setText(apkInfo.apkSize);
+        switch (apkInfo.apkType) {
+            case 0:
+                apkViewHolder.mInstallApk.setText("已安装");
+                break;
+            case 1:
+                apkViewHolder.mInstallApk.setText("安装");
+                break;
+            case 2:
+                apkViewHolder.mInstallApk.setText("更新");
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

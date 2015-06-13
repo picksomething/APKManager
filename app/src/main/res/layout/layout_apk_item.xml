@@ -10,22 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/apkIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/apkName"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/apkIcon"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/apkIcon"
-            android:textSize="18sp" />
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/apkSize"
@@ -34,31 +36,29 @@
             android:layout_alignBottom="@id/apkIcon"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/apkIcon"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/installBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/po_bt_selector"
             android:gravity="center"
             android:text="@string/apk_install"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/delBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@id/installBt"
             android:background="@drawable/ne_bt_selector"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:text="@string/apk_del"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
