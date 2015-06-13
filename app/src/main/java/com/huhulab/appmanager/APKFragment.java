@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class APKFragment extends Fragment {
 
     private RecyclerView mApkRecyclerView;
@@ -23,6 +26,8 @@ public class APKFragment extends Fragment {
         mAPKLayoutManager = new LinearLayoutManager(this.getActivity());
         mAPKLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mApkRecyclerView.setLayoutManager(mAPKLayoutManager);
+        APKAdapter apkAdapter = new APKAdapter(createList(30));
+        mApkRecyclerView.setAdapter(apkAdapter);
         return apkView;
     }
 
@@ -34,5 +39,18 @@ public class APKFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    private List<APKInfo> createList(int size) {
+
+        List<APKInfo> apkInfoList = new ArrayList<APKInfo>();
+        for (int i = 1; i <= size; i++) {
+            APKInfo appInfo = new APKInfo();
+            appInfo.apkName = "效率解锁清理";
+            appInfo.apkSize = "0.17M";
+            apkInfoList.add(appInfo);
+
+        }
+        return apkInfoList;
     }
 }

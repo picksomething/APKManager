@@ -1,12 +1,11 @@
 package com.huhulab.appmanager;
 
 
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.graphics.Bitmap;
 
 public class APKInfo {
 
-    public ImageView apkIcon;
-    public TextView apkName;
-    public TextView apkSize;
+    public Bitmap apkIcon;
+    public String apkName;
+    public String apkSize;
 }
