@@ -27,6 +27,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ViewPager mPager;
 
     private TextView mTabAPK, mTabAPP;
+    private LinearLayout mTabAPKLL, mTabAPPLL;
     private ImageView mTabLine;
 
     private APKFragment mAPKFragment;
@@ -67,13 +68,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void setListeners() {
-        mTabAPK.setOnClickListener(this);
-        mTabAPP.setOnClickListener(this);
+        mTabAPKLL.setOnClickListener(this);
+        mTabAPPLL.setOnClickListener(this);
     }
 
     private void findViews() {
         mTabAPK = (TextView) findViewById(R.id.apk_tv);
         mTabAPP = (TextView) findViewById(R.id.app_tv);
+        mTabAPKLL = (LinearLayout) findViewById(R.id.tab_apk_ll);
+        mTabAPPLL = (LinearLayout) findViewById(R.id.tab_app_ll);
         mTabLine = (ImageView) findViewById(R.id.tab_line_iv);
         mPager = (ViewPager) findViewById(R.id.viewPager);
     }
@@ -81,10 +84,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.apk_tv:
+            case R.id.tab_apk_ll:
                 mPager.setCurrentItem(0);
                 break;
-            case R.id.app_tv:
+            case R.id.tab_app_ll:
                 mPager.setCurrentItem(1);
                 break;
             default:
