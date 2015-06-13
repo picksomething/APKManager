@@ -3,12 +3,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/apkList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="安装包管理"
-        android:textColor="#FF0000"
-        android:textSize="20sp"></TextView>
+        />
 
 </LinearLayout>
