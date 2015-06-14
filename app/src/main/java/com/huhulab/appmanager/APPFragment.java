@@ -26,7 +26,8 @@ public class APPFragment extends Fragment {
         mAPPLayoutManager = new LinearLayoutManager(this.getActivity());
         mAPPLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mAppRecyclerView.setLayoutManager(mAPPLayoutManager);
-        APPAdapter appAdapter = new APPAdapter(createList(30));
+        APPAdapter appAdapter = new APPAdapter(
+                AppUtils.getAppList(this.getActivity().getApplicationContext()));
         mAppRecyclerView.setAdapter(appAdapter);
         return appView;
     }
@@ -47,7 +48,7 @@ public class APPFragment extends Fragment {
         for (int i = 1; i <= size; i++) {
             APPInfo appInfo = new APPInfo();
             appInfo.appName = "效率解锁清理";
-            appInfo.appVersion = "V1.2.12";
+            appInfo.appVersionName = "V1.2.12";
             appInfoList.add(appInfo);
 
         }

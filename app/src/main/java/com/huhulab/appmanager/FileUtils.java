@@ -6,7 +6,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -20,8 +19,6 @@ public class FileUtils {
     private static int UNINSTALLED = 1; // 表示未安装
     private static int INSTALLED_UPDATE = 2; // 表示已经安装，版本比现在这个版本要低，可以点击按钮更新
 
-    public static final String SD_PATH = Environment
-            .getExternalStorageDirectory().getAbsolutePath();
     public static final String TAG = "file";
     public static List<File> apkFileList = new ArrayList<>();
     public static List<APKInfo> apkInfoList = new ArrayList<>();

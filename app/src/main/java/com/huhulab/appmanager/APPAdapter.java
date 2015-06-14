@@ -1,6 +1,7 @@
 package com.huhulab.appmanager;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,13 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
     private List<APPInfo> mAppInfoList;
 
     public APPAdapter(List<APPInfo> mAppInfoList) {
+        Log.d("app", "data size is " + mAppInfoList.size());
         this.mAppInfoList = mAppInfoList;
     }
 
 
     @Override
-    public APPViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public APPAdapter.APPViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.layout_app_item, viewGroup, false);
@@ -30,9 +32,9 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
     @Override
     public void onBindViewHolder(APPViewHolder appViewHolder, int i) {
         APPInfo appInfo = mAppInfoList.get(i);
-        appViewHolder.mAppIcon.setImageResource(R.mipmap.ic_launcher);
+        appViewHolder.mAppIcon.setImageDrawable(appInfo.appIcon);
         appViewHolder.mAppName.setText(appInfo.appName);
-        appViewHolder.mAppVersion.setText(appInfo.appVersion);
+        appViewHolder.mAppVersion.setText(appInfo.appVersionCode + "");
     }
 
     @Override
@@ -52,8 +54,8 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
             mAppIcon = (ImageView) v.findViewById(R.id.appIcon);
             mAppName = (TextView) v.findViewById(R.id.appName);
             mAppVersion = (TextView) v.findViewById(R.id.appVersion);
-            mOpenIt = (Button) v.findViewById(R.id.delBt);
-            mUninstallIt = (Button) v.findViewById(R.id.installBt);
+            mOpenIt = (Button) v.findViewById(R.id.openIt);
+            mUninstallIt = (Button) v.findViewById(R.id.uninstallIt);
         }
     }
 }

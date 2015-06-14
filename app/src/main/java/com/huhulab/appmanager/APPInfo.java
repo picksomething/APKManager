@@ -1,9 +1,13 @@
 package com.huhulab.appmanager;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 
 public class APPInfo {
-    public Bitmap appIcon;
+    public Drawable appIcon;
     public String appName;
-    public String appVersion;
+    public String appVersionName;
+    public int appVersionCode;
+    public String appPackage;
+    public Intent appIntent;
 }
