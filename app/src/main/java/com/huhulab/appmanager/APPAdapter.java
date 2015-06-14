@@ -34,7 +34,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
         APPInfo appInfo = mAppInfoList.get(i);
         appViewHolder.mAppIcon.setImageDrawable(appInfo.appIcon);
         appViewHolder.mAppName.setText(appInfo.appName);
-        appViewHolder.mAppVersion.setText(appInfo.appVersionCode + "");
+        appViewHolder.mAppVersion.setText(appInfo.appVersionName);
     }
 
     @Override
