@@ -43,25 +43,27 @@
         <Button
             android:id="@+id/openIt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
             android:background="@drawable/po_bt_selector"
             android:gravity="center"
             android:text="@string/app_open"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/uninstallIt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/openIt"
-            android:background="@drawable/ne_bt_selector"
+            android:background="@drawable/image_bt_selector"
             android:gravity="center"
-            android:text="@string/app_uninstall"
-            android:textSize="16sp" />
+            android:scaleType="centerInside"
+            android:src="@drawable/uninstall" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

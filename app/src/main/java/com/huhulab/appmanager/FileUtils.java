@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
-    private static int INSTALLED = 0; // 表示已经安装，且跟现在这个apk文件是一个版本
-    private static int UNINSTALLED = 1; // 表示未安装
-    private static int INSTALLED_UPDATE = 2; // 表示已经安装，版本比现在这个版本要低，可以点击按钮更新
+    private static int INSTALLED = 0;
+    private static int UNINSTALLED = 1;
+    private static int INSTALLED_UPDATE = 2;
 
     public static final String TAG = "file";
     public static List<APKInfo> apkInfoList = new ArrayList<>();
@@ -37,6 +37,9 @@ public class FileUtils {
         File files[] = root.listFiles();
         if (files != null) {
             for (File f : files) {
+                if (f.isDirectory() && f.getName().startsWith(".")) {
+                    continue;
+                }
                 if (f.isDirectory() && f.canRead()) {
                     Log.d(TAG, "directory is " + f);
                     getAllFiles(f, context);

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         }
         apkViewHolder.mApkName.setText(apkInfo.apkName);
         apkViewHolder.mApkSize.setText(apkInfo.apkSize);
+        apkViewHolder.mDelApk.setAlpha(0.8f);
         apkViewHolder.mDelApk.setOnClickListener(new MyButtonListener(i));
         switch (apkInfo.apkType) {
             case 0:
@@ -76,7 +78,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         public ImageView mApkIcon;
         public TextView mApkName;
         public TextView mApkSize;
-        public Button mDelApk;
+        public ImageButton mDelApk;
         public Button mInstallApk;
 
         public APKViewHolder(View v) {
@@ -84,7 +86,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
             mApkIcon = (ImageView) v.findViewById(R.id.apkIcon);
             mApkName = (TextView) v.findViewById(R.id.apkName);
             mApkSize = (TextView) v.findViewById(R.id.apkSize);
-            mDelApk = (Button) v.findViewById(R.id.delBt);
+            mDelApk = (ImageButton) v.findViewById(R.id.delBt);
             mInstallApk = (Button) v.findViewById(R.id.installBt);
         }
     }
@@ -102,6 +104,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
             Log.d("apk", "on click and position = " + position);
             switch (view.getId()) {
                 case R.id.delBt:
+                    view.setAlpha(1.0f);
                     File apkFile = new File(mApkInfoList.get(position).apkPath);
                     if (apkFile.exists()) apkFile.delete();
                     Log.d("apk", "file is deleted");

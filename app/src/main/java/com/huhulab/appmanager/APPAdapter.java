@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
         public TextView mAppName;
         public TextView mAppVersion;
         public Button mOpenIt;
-        public Button mUninstallIt;
+        public ImageButton mUninstallIt;
 
         public APPViewHolder(View v) {
             super(v);
@@ -63,7 +64,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
             mAppName = (TextView) v.findViewById(R.id.appName);
             mAppVersion = (TextView) v.findViewById(R.id.appVersion);
             mOpenIt = (Button) v.findViewById(R.id.openIt);
-            mUninstallIt = (Button) v.findViewById(R.id.uninstallIt);
+            mUninstallIt = (ImageButton) v.findViewById(R.id.uninstallIt);
         }
     }
 
@@ -92,7 +93,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.APPViewHolder> {
     }
 
     /**
-     * uninstall app
+     * del app
      *
      * @param packageName
      */

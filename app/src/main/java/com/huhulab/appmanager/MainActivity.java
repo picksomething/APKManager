@@ -58,8 +58,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void initDatas() {
         mAPKFragment = new APKFragment();
         mAPPFragment = new APPFragment();
-        mFragmentList.add(mAPPFragment);
         mFragmentList.add(mAPKFragment);
+        mFragmentList.add(mAPPFragment);
         mFragmentAdapter = new FragmentAdapter(
                 this.getSupportFragmentManager(), mFragmentList);
         mPager.setAdapter(mFragmentAdapter);

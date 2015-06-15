@@ -5,5 +5,5 @@
     <item name="persian_green" type="color">#FF00A792</item>
     <item name="athens_gray" type="color">#FFE0E0E0</item>
     <item name="french_gray" type="color">#FFBDBDBD</item>
-    <item name="white" type="color">#FFFFFFFF</item>
+    <item name="white" type="color">#FFFAFAFA</item>
 </resources>
