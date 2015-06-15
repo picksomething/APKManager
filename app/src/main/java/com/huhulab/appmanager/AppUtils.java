@@ -13,8 +13,11 @@ public class AppUtils {
 
     private static final String TAG = "app";
     private static List<APPInfo> appList = new ArrayList<>();
-    
+
     public static List<APPInfo> getAppList(Context context) {
+        if(appList.size() != 0){
+            appList.clear();
+        }
         getAPPInfo(context);
         Log.d(TAG, "app info size " + appList.size());
         return appList;

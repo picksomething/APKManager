@@ -20,75 +20,57 @@ public class FileUtils {
     private static int INSTALLED_UPDATE = 2; // 表示已经安装，版本比现在这个版本要低，可以点击按钮更新
 
     public static final String TAG = "file";
-    public static List<File> apkFileList = new ArrayList<>();
     public static List<APKInfo> apkInfoList = new ArrayList<>();
 
     public static List<APKInfo> getResultList(Context context) {
-        getAllFiles(new File("/sdcard"));
-        Log.d(TAG, "apkFile List size =" + apkFileList.size());
-        transToApkInfo(apkFileList, context);
+        if (apkInfoList.size() != 0) {
+            apkInfoList.clear();
+        }
+        getAllFiles(new File("/sdcard"), context);
         Log.d(TAG, "apkInfo List size =" + apkInfoList.size());
         return apkInfoList;
     }
 
 
-    public static void getAllFiles(File root) {
+    public static void getAllFiles(File root, Context context) {
         if (!root.exists()) return;
         File files[] = root.listFiles();
         if (files != null) {
             for (File f : files) {
                 if (f.isDirectory() && f.canRead()) {
                     Log.d(TAG, "directory is " + f);
-                    getAllFiles(f);
+                    getAllFiles(f, context);
                 } else if (f.isFile() && f.getName().endsWith(".apk")) {
                     Log.d(TAG, "file is " + f);
-                    apkFileList.add(f);
-                }
-            }
-        }
-    }
+                    APKInfo apkInfo = new APKInfo();
+                    String apkPath = f.getAbsolutePath();
+                    String apkSize = formatFileSize(getFileSize(f));
+                    PackageManager pm = context.getPackageManager();
+                    PackageInfo packageInfo = pm.getPackageArchiveInfo(apkPath, PackageManager.GET_ACTIVITIES);
+                    if (packageInfo != null) {
+                        ApplicationInfo appInfo = packageInfo.applicationInfo;
+                        if (Build.VERSION.SDK_INT >= 8) {
+                            appInfo.sourceDir = apkPath;
+                            appInfo.publicSourceDir = apkPath;
+                        }
+                        Drawable apk_icon = appInfo.loadIcon(pm);
+                        apkInfo.apkIcon = apk_icon;
+                        apkInfo.apkName = f.getName().substring(0, f.getName().lastIndexOf("."));
+                        apkInfo.apkSize = apkSize;
+                        apkInfo.apkPath = apkPath;
 
-    public static void transToApkInfo(List<File> apkFileList, Context context) {
-        try {
-            if (apkInfoList.size() != 0) {
-                apkInfoList.clear();
-            }
-            for (File f : apkFileList) {
-                Log.d(TAG, "######apk is " + f);
-                APKInfo apkInfo = new APKInfo();
-                String apkPath = f.getAbsolutePath();
-                String apkSize = formetFileSize(getFileSize(f));
-                PackageManager pm = context.getPackageManager();
-                PackageInfo packageInfo = pm.getPackageArchiveInfo(apkPath, PackageManager.GET_ACTIVITIES);
-                /**获取apk的图标 */
-                if (packageInfo != null) {
-                    ApplicationInfo appInfo = packageInfo.applicationInfo;
-                    if (Build.VERSION.SDK_INT >= 8) {
-                        appInfo.sourceDir = apkPath;
-                        appInfo.publicSourceDir = apkPath;
+                        String packageName = packageInfo.packageName;
+                        // apkInfo.apkPackage = packageName;
+                        String versionName = packageInfo.versionName;
+                        apkInfo.apkVersionName = versionName;
+                        int versionCode = packageInfo.versionCode;
+                        apkInfo.apkVersionCode = versionCode;
+                        int type = doType(pm, packageName, versionCode);
+                        apkInfo.apkType = type;
+                        apkInfoList.add(apkInfo);
                     }
-                    Drawable apk_icon = appInfo.loadIcon(pm);
-                    apkInfo.apkIcon = apk_icon;
-                    apkInfo.apkName = f.getName().substring(0, f.getName().lastIndexOf("."));
-                    apkInfo.apkSize = apkSize;
-                    apkInfo.apkPath = apkPath;
-
-                    /** 得到包名 */
-                    String packageName = packageInfo.packageName;
-                    // apkInfo.apkPackage = packageName;
-                    /** apk的版本名称 String*/
-                    String versionName = packageInfo.versionName;
-                    apkInfo.apkVersionName = versionName;
-                    /** apk的版本号码 int */
-                    int versionCode = packageInfo.versionCode;
-                    apkInfo.apkVersionCode = versionCode;
-                    int type = doType(pm, packageName, versionCode);
-                    apkInfo.apkType = type;
-                    apkInfoList.add(apkInfo);
                 }
             }
-        } catch (Exception e) {
-            Log.d(TAG, "get apk info " + e);
         }
     }
 
@@ -132,12 +114,11 @@ public class FileUtils {
         long size = 0;
         try {
             if (file.exists()) {
-                FileInputStream fis = null;
-                fis = new FileInputStream(file);
+                FileInputStream fis = new FileInputStream(file);
                 size = fis.available();
             } else {
                 file.createNewFile();
-                Log.e("获取文件大小", "文件不存在!");
+                Log.d(TAG, "file not exist");
             }
         } catch (Exception e) {
             Log.d(TAG, "get file size error " + e);
@@ -145,7 +126,7 @@ public class FileUtils {
         return size;
     }
 
-    public static String formetFileSize(long fileS) {
+    public static String formatFileSize(long fileS) {
         DecimalFormat df = new DecimalFormat("#.00");
         String fileSizeString;
         if (fileS < 1024) {
