@@ -1,6 +1,9 @@
 package com.huhulab.appmanager;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +19,11 @@ import java.util.List;
 public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
 
     private List<APKInfo> mApkInfoList;
+    private Context mContext;
 
-    public APKAdapter(List<APKInfo> mApkInfoList) {
+    public APKAdapter(List<APKInfo> mApkInfoList, Context mContext) {
         this.mApkInfoList = mApkInfoList;
+        this.mContext = mContext;
     }
 
     @Override
@@ -104,10 +109,24 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
                     notifyItemRemoved(position);
                     break;
                 case R.id.installBt:
+                    startToInstall(mApkInfoList.get(position).apkPath);
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    public void startToInstall(String path) {
+        try {
+            Runtime.getRuntime().exec("chmod 777 " + path).waitFor();
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setDataAndType(Uri.fromFile(
+                    new File(path)), "application/vnd.android.package-archive");
+            mContext.startActivity(i);
+        } catch (Exception e) {
+            Log.d("apk", "startToInstall fail exception = " + e);
         }
     }
 }
