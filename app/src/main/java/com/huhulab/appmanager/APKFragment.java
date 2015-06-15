@@ -3,6 +3,7 @@ package com.huhulab.appmanager;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ public class APKFragment extends Fragment {
         View apkView = inflater.inflate(R.layout.layout_tab_apk, container, false);
         mApkRecyclerView = (RecyclerView) apkView.findViewById(R.id.apkList);
         mApkRecyclerView.setHasFixedSize(true);
+        mApkRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mAPKLayoutManager = new LinearLayoutManager(this.getActivity());
         mAPKLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mApkRecyclerView.setLayoutManager(mAPKLayoutManager);

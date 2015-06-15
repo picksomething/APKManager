@@ -2,6 +2,7 @@ package com.huhulab.appmanager;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
@@ -27,7 +29,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(APKViewHolder apkViewHolder, int i) {
+    public void onBindViewHolder(APKViewHolder apkViewHolder, final int i) {
         APKInfo apkInfo = mApkInfoList.get(i);
         if (apkInfo.apkIcon == null) {
             apkViewHolder.mApkIcon.setImageResource(R.mipmap.ic_launcher);
@@ -36,6 +38,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         }
         apkViewHolder.mApkName.setText(apkInfo.apkName);
         apkViewHolder.mApkSize.setText(apkInfo.apkSize);
+        apkViewHolder.mDelApk.setOnClickListener(new MyButtonListener(i));
         switch (apkInfo.apkType) {
             case 0:
                 apkViewHolder.mInstallApk.setText("已安装");
@@ -46,11 +49,13 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
                 apkViewHolder.mInstallApk.setEnabled(true);
                 apkViewHolder.mInstallApk.setText("安装");
                 apkViewHolder.mInstallApk.setAlpha(1.0f);
+                apkViewHolder.mInstallApk.setOnClickListener(new MyButtonListener(i));
                 break;
             case 2:
                 apkViewHolder.mInstallApk.setEnabled(true);
-                apkViewHolder.mInstallApk.setText("更新");
+                apkViewHolder.mInstallApk.setText("可更新");
                 apkViewHolder.mInstallApk.setAlpha(1.0f);
+                apkViewHolder.mInstallApk.setOnClickListener(new MyButtonListener(i));
                 break;
             default:
                 break;
@@ -76,6 +81,33 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
             mApkSize = (TextView) v.findViewById(R.id.apkSize);
             mDelApk = (Button) v.findViewById(R.id.delBt);
             mInstallApk = (Button) v.findViewById(R.id.installBt);
+        }
+    }
+
+    public class MyButtonListener implements View.OnClickListener {
+
+        public int position;
+
+        private MyButtonListener(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.d("apk", "on click and position = " + position);
+            switch (view.getId()) {
+                case R.id.delBt:
+                    File apkFile = new File(mApkInfoList.get(position).apkPath);
+                    if (apkFile.exists()) apkFile.delete();
+                    Log.d("apk", "file is deleted");
+                    mApkInfoList.remove(position);
+                    notifyItemRemoved(position);
+                    break;
+                case R.id.installBt:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
