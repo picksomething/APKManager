@@ -3,6 +3,8 @@ package com.huhulab.appmanager;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class APKFragment extends Fragment {
 
     private RecyclerView mApkRecyclerView;
     private LinearLayoutManager mAPKLayoutManager;
     private Context mContext;
+    private APKAdapter mApkAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,9 +33,7 @@ public class APKFragment extends Fragment {
         mAPKLayoutManager = new LinearLayoutManager(this.getActivity());
         mAPKLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mApkRecyclerView.setLayoutManager(mAPKLayoutManager);
-        APKAdapter apkAdapter = new APKAdapter(
-                FileUtils.getResultList(mContext), mContext);
-        mApkRecyclerView.setAdapter(apkAdapter);
+        FileUtils.getResultList(mContext, onScanOverEvent);
         return apkView;
     }
 
@@ -38,4 +41,18 @@ public class APKFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
+    private FileUtils.OnScanOverEvent onScanOverEvent = new FileUtils.OnScanOverEvent() {
+        @Override
+        public void onScanOver(final List<APKInfo> apkInfoList) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    mApkAdapter = new APKAdapter(apkInfoList, mContext);
+                    mApkRecyclerView.setAdapter(mApkAdapter);
+                }
+            });
+
+        }
+    };
 }

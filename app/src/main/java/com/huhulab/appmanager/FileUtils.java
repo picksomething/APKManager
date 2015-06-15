@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FileUtils {
     private static int INSTALLED = 0;
@@ -21,18 +23,23 @@ public class FileUtils {
 
     public static final String TAG = "file";
     public static List<APKInfo> apkInfoList = new ArrayList<>();
+    public static ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 
-    public static List<APKInfo> getResultList(Context context) {
+    public static List<APKInfo> getResultList(final Context context, final OnScanOverEvent overEvent) {
         if (apkInfoList.size() != 0) {
             apkInfoList.clear();
         }
-        getAllFiles(new File("/sdcard"), context);
+        fixedThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                getAllFiles(new File("/sdcard"), context, overEvent);
+            }
+        });
         Log.d(TAG, "apkInfo List size =" + apkInfoList.size());
         return apkInfoList;
     }
 
-
-    public static void getAllFiles(File root, Context context) {
+    public static void getAllFiles(File root, Context context, OnScanOverEvent scanOverEvent) {
         if (!root.exists()) return;
         File files[] = root.listFiles();
         if (files != null) {
@@ -42,7 +49,7 @@ public class FileUtils {
                 }
                 if (f.isDirectory() && f.canRead()) {
                     Log.d(TAG, "directory is " + f);
-                    getAllFiles(f, context);
+                    getAllFiles(f, context, scanOverEvent);
                 } else if (f.isFile() && f.getName().endsWith(".apk")) {
                     Log.d(TAG, "file is " + f);
                     APKInfo apkInfo = new APKInfo();
@@ -71,6 +78,7 @@ public class FileUtils {
                         int type = doType(pm, packageName, versionCode);
                         apkInfo.apkType = type;
                         apkInfoList.add(apkInfo);
+                        scanOverEvent.onScanOver(apkInfoList);
                     }
                 }
             }
@@ -142,5 +150,9 @@ public class FileUtils {
             fileSizeString = df.format((double) fileS / 1073741824) + "G";
         }
         return fileSizeString;
+    }
+
+    public interface OnScanOverEvent {
+        void onScanOver(List<APKInfo> apkInfoList);
     }
 }
