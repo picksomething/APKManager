@@ -34,7 +34,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(APKViewHolder apkViewHolder, final int i) {
+    public void onBindViewHolder(APKViewHolder apkViewHolder, int i) {
         APKInfo apkInfo = mApkInfoList.get(i);
         if (apkInfo.apkIcon == null) {
             apkViewHolder.mApkIcon.setImageResource(R.mipmap.ic_launcher);
@@ -89,7 +89,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         }
     }
 
-    public class MyButtonListener implements View.OnClickListener {
+    private class MyButtonListener implements View.OnClickListener {
 
         public int position;
 
