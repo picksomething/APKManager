@@ -58,8 +58,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void initDatas() {
         mAPKFragment = new APKFragment();
         mAPPFragment = new APPFragment();
-        mFragmentList.add(mAPKFragment);
         mFragmentList.add(mAPPFragment);
+        mFragmentList.add(mAPKFragment);
         mFragmentAdapter = new FragmentAdapter(
                 this.getSupportFragmentManager(), mFragmentList);
         mPager.setAdapter(mFragmentAdapter);
@@ -115,10 +115,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             resetTabTitle();
             switch (position) {
                 case 0:
-                    mTabAPK.setTextColor(Color.BLUE);
+                    mTabAPK.setTextColor(getResources().getColor(R.color.tiffany_blue));
                     break;
                 case 1:
-                    mTabAPP.setTextColor(Color.BLUE);
+                    mTabAPP.setTextColor(getResources().getColor(R.color.tiffany_blue));
                     break;
                 default:
                     break;
