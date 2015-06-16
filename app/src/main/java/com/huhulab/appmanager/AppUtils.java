@@ -15,15 +15,9 @@ public class AppUtils {
     private static List<APPInfo> appList = new ArrayList<>();
 
     public static List<APPInfo> getAppList(Context context) {
-        if(appList.size() != 0){
+        if (appList.size() != 0) {
             appList.clear();
         }
-        getAPPInfo(context);
-        Log.d(TAG, "app info size " + appList.size());
-        return appList;
-    }
-
-    public static void getAPPInfo(Context context) {
         List<PackageInfo> packages = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packages.size(); i++) {
             PackageInfo packageInfo = packages.get(i);
@@ -43,5 +37,7 @@ public class AppUtils {
                 appList.add(tmpInfo);
             }
         }
+        Log.d(TAG, "app info size " + appList.size());
+        return appList;
     }
 }

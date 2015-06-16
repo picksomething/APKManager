@@ -21,6 +21,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
 
     private List<APKInfo> mApkInfoList;
     private Context mContext;
+    private static int mPos;
 
     public APKAdapter(List<APKInfo> mApkInfoList, Context mContext) {
         this.mApkInfoList = mApkInfoList;
@@ -74,6 +75,10 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
         return mApkInfoList.size();
     }
 
+    public static int getPos(){
+        return mPos;
+    }
+
     public static class APKViewHolder extends RecyclerView.ViewHolder {
         public ImageView mApkIcon;
         public TextView mApkName;
@@ -113,6 +118,7 @@ public class APKAdapter extends RecyclerView.Adapter<APKAdapter.APKViewHolder> {
                     break;
                 case R.id.installBt:
                     startToInstall(mApkInfoList.get(position).apkPath);
+                    mPos = position;
                     break;
                 default:
                     break;
