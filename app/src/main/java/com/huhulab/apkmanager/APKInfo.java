@@ -1,4 +1,4 @@
-package com.huhulab.appmanager;
+package com.huhulab.apkmanager;
 
 
 import android.graphics.drawable.Drawable;

@@ -1,4 +1,4 @@
-package com.huhulab.appmanager;
+package com.huhulab.apkmanager;
 
 import android.app.Dialog;
 import android.content.Context;
