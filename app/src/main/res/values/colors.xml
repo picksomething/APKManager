@@ -6,4 +6,6 @@
     <item name="athens_gray" type="color">#FFE0E0E0</item>
     <item name="french_gray" type="color">#FFBDBDBD</item>
     <item name="white" type="color">#FFFAFAFA</item>
+    <item name="transparent" type="color">#00FFFFFF</item>
+    <item name="black" type="color">#FF212121</item>
 </resources>

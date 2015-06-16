@@ -48,10 +48,8 @@ public class FileUtils {
                     continue;
                 }
                 if (f.isDirectory() && f.canRead()) {
-                    Log.d(TAG, "directory is " + f);
                     getAllFiles(f, context, scanOverEvent);
                 } else if (f.isFile() && f.getName().endsWith(".apk")) {
-                    Log.d(TAG, "file is " + f);
                     APKInfo apkInfo = new APKInfo();
                     String apkPath = f.getAbsolutePath();
                     String apkSize = formatFileSize(getFileSize(f));

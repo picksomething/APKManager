@@ -1,6 +1,7 @@
 package com.huhulab.appmanager;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,12 +22,15 @@ public class APKFragment extends Fragment {
     private LinearLayoutManager mAPKLayoutManager;
     private Context mContext;
     private APKAdapter mApkAdapter;
+    private Dialog mLoading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View apkView = inflater.inflate(R.layout.layout_tab_apk, container, false);
         mContext = this.getActivity().getApplicationContext();
+        View apkView = inflater.inflate(R.layout.layout_tab_apk, container, false);
+        mLoading = Utils.createLoadingDialog(this.getActivity());
+        mLoading.show();
         mApkRecyclerView = (RecyclerView) apkView.findViewById(R.id.apkList);
         mApkRecyclerView.setHasFixedSize(true);
         mApkRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -50,6 +54,7 @@ public class APKFragment extends Fragment {
                 public void run() {
                     mApkAdapter = new APKAdapter(apkInfoList, mContext);
                     mApkRecyclerView.setAdapter(mApkAdapter);
+                    mLoading.dismiss();
                 }
             });
 

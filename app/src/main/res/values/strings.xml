@@ -9,4 +9,5 @@
     <string name="apk_install">安装</string>
     <string name="app_open">打开</string>
     <string name="app_uninstall">卸载</string>
+    <string name="scan_hint">正在扫描安装包...</string>
 </resources>
